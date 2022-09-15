@@ -8,55 +8,66 @@ namespace RPGCombat.Personagens
 {
     public abstract class Habilidades : Personagem
     {
-        protected Habilidades(string racaPersonagem):base(racaPersonagem)
+
+        //Quando o retorno da skill é 0, ela simplesmente é executada sem interação com o oponente
+        //Quando o retorno da skill é null, precisa escolher novamente uma opção
+        //Qualquer número que retornar diferente dos descrito acima, executa uma skill com interação com o oponente
+
+
+        protected Habilidades(string racaPersonagem, int vida, int mana, int atk) : base(racaPersonagem, vida, mana, atk)
         {
 
         }
 
         public string[] HabilidadesPersonagem { get; } = new string[3] { "Ataque Fisico", "Ataque Magico", "Curar" };
 
-        public int UsarHabilidade(int key)
+        public int? UsarHabilidade(string key, string nome)
         {
             switch (key)
             {
-                case 1:
-                    return AtaqueFisico();
-                case 2:
-                    return AtaqueMagico();
-                case 3:
-                    Curar();
+                case "1":
+                    return AtaqueFisico(nome);
+                case "2":
+                    return AtaqueMagico(nome);
+                case "3":
+                    Curar(nome);
                     return 0;
                 default:
-                    return 0;
+                    return null;
             }
         }
 
-        private int AtaqueFisico()
+        private int AtaqueFisico(string nome)
         {
-            //Custo em mana(0) - Atk * 1
-            Console.WriteLine($"\n {RacaPersonagem}: ");
-            Console.WriteLine($" Realizou um ataque fisico:\n Total dano: {Atk * 1}\n Mana gasta: 0");
-
+            Console.WriteLine($"\n   {nome} realizou um ataque fisico -> Dano: {Atk * 1}");
             return Atk;
         }
-        private int AtaqueMagico()
+        private int AtaqueMagico(string nome)
         {
-            //Custo em mana (10) - Atk * 2 
-            Console.WriteLine($"\n {RacaPersonagem}: ");
-            Console.WriteLine($" Realizou um ataque magico:\n Total dano: {Atk * 2}\n Mana gasta: 10");
-
-            Mana -= 10;
-            return Atk * 2;
+            if(Mana >= 10)
+            {
+                Console.WriteLine($"\n   {nome} realizou um ataque magico -> Dano: {Atk * 2} | Mana: -10");
+                Mana -= 10;
+                return Atk * 2;
+            }
+            else
+            {
+                Console.WriteLine($"\n   {nome} tentou um ataque magico, mas falhou!!");
+                return 0;
+            }
         }
-        private void Curar()
+        private void Curar(string nome)
         {
-            //Custo em mana (10) - Atk / 2
-            Console.WriteLine($"\n {RacaPersonagem}: ");
-            Console.WriteLine($" Se curou:\n Total cura: {Atk / 2}\n Mana gasta: 10");
-            
-            Mana -= 10;
-            Vida += Atk / 2;
-
+            if(Mana >= 10)
+            {
+                Console.WriteLine($"\n   {nome} se curou -> Vida: +{Atk / 2} | Mana: -10");
+                Mana -= 10;
+                Vida += Atk / 2;
+            }
+            else
+            {
+                Console.WriteLine($"\n   {nome} tentou se curar, mas falhou!!");
+            }
         }
     }
 }

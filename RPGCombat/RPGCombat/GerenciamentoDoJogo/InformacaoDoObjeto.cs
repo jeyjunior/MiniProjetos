@@ -11,10 +11,10 @@ namespace RPGCombat.GerenciamentoDoJogo
     {
         public static void Informacoes(string nomeDoObjeto, Habilidades objeto)
         {
-            Console.WriteLine($"\n{nomeDoObjeto}:");
-            Console.WriteLine($"Life: {objeto.Vida}");
-            Console.WriteLine($"Mana: {objeto.Mana}");
-            Console.WriteLine($"Atk: {objeto.Atk} \n");
+            Console.WriteLine($"  {nomeDoObjeto}:");
+            Console.WriteLine($"  Life: {objeto.Vida}");
+            Console.WriteLine($"  Mana: {objeto.Mana}");
+            Console.WriteLine($"  Atk: {objeto.Atk}\n");
         }
 
     }

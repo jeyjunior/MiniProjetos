@@ -11,74 +11,88 @@ namespace RPGCombat.GerenciamentoDoJogo
     public static class Combate
     {
 
+        private static int turno = 0;
 
-        public static void IniciarCombate(Jogador jogador) {
+        public static bool IniciarCombate(Jogador jogador, Habilidades inimigo) {
 
-            int rodada = 1;
             bool fimCombat = false;
 
-            //gerar inimigo aleatorio
-            Random r = new();
-            var inimigo = InstanciarPersonagens.IntanciarInimigosAleatorios(r.Next(1, InstanciarPersonagens.totalInimigos + 1));
+
 
             do
             {
-                
-                Console.WriteLine($"-Rodada: {rodada++}\n");
+                Console.Clear();
+                turno++;
+                Console.WriteLine("  INFORMAÇÕES DO COMBATE ");
+                Console.WriteLine("  ----------------------  ");
+                Console.WriteLine($"  Turno: {turno}");
+                Console.WriteLine("  ----------------------  ");
                 InformacaoDoObjeto.Informacoes("Jogador", jogador);
                 InformacaoDoObjeto.Informacoes(inimigo.RacaPersonagem, inimigo);
-
+                Console.WriteLine("  ----------------------  ");
                 AcaoJogador(jogador, inimigo);
-                AcaoInimigo(jogador, inimigo, r);
+                AcaoInimigo(jogador, inimigo);
 
 
 
                 if(inimigo.Vida <= 0)
                 {
                     fimCombat = true;
-                    Console.WriteLine("Player Matou inimigo");
+                    Console.WriteLine("\n  Você derrotou o inimigo");
                 }
                 else if(jogador.Vida <= 0)
                 {
                     fimCombat = true;
-                    Console.WriteLine("Player MORREU");
+                    Console.WriteLine("\n  VOCÊ MORREU!!!");
                 }
 
+                Console.WriteLine("\n  Continuar");
                 Console.ReadLine();
-                Console.Clear();
+
+                if(fimCombat) turno = 0;
+                return fimCombat;
             }
             while (!fimCombat);
+            
         }
 
         private static void AcaoJogador(Habilidades jogador, Habilidades inimigo)
         {
-            Console.WriteLine("Escolha sua habilidade:");
+
+            Console.WriteLine("  Escolha sua habilidade:");
             for (int i = 0; i < jogador.HabilidadesPersonagem.Length; i++)
             {
-                Console.WriteLine($" {i + 1}. {jogador.HabilidadesPersonagem[i]}");
+                Console.WriteLine($"  {i + 1}. {jogador.HabilidadesPersonagem[i]}");
             }
 
 
-            Console.Write("\nDigite: ");
-            int hPersonagem = jogador.UsarHabilidade(Convert.ToInt16(Console.ReadLine()));
+
+            int? hPersonagem = null;
+            while(hPersonagem == null)
+            {
+
+                Console.Write("\n  Digite: ");
+                hPersonagem = jogador.UsarHabilidade(Console.ReadLine(), "Você");
+            }
 
             if (hPersonagem != 0)
             {
-                inimigo.Vida -= hPersonagem;
+                inimigo.Vida -= (int)hPersonagem;
             }
+
         }
 
-        private static void AcaoInimigo(Habilidades jogador, Habilidades inimigo, Random r)
+        private static void AcaoInimigo(Habilidades jogador, Habilidades inimigo)
         {
-            int hInimigo = inimigo.UsarHabilidade(r.Next(1, inimigo.HabilidadesPersonagem.Length + 1));
+            Random r = new();
+
+            int? hInimigo = inimigo.UsarHabilidade(r.Next(1, inimigo.HabilidadesPersonagem.Length + 1).ToString(), inimigo.RacaPersonagem);
 
             if (hInimigo != 0)
             {
-                jogador.Vida -= hInimigo;
+                jogador.Vida -= (int)hInimigo;
             }
         }
-
-
 
     }
 }

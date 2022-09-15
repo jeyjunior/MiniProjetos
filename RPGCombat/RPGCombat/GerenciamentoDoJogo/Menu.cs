@@ -6,12 +6,8 @@ namespace RPGCombat.GerenciamentoDoJogo
     {
         public static int? ExibirMenu(string nomeAcaoUm)
         {
-
-            Console.Clear();
-            Console.WriteLine(" RPG COMBAT");
-            Console.WriteLine(" ---------------------");
-            Console.WriteLine($" 1. {nomeAcaoUm}\n 2. Sair");
-            Console.Write(" \nDigite o número da ação desejada: ");
+            Console.WriteLine($"  1. {nomeAcaoUm}\n  2. Sair");
+            Console.Write(" \n Digite: ");
 
             string key = Console.ReadLine();
 
@@ -29,12 +25,8 @@ namespace RPGCombat.GerenciamentoDoJogo
         
         public static int? ExibirMenu(string nomeAcaoUm, string nomeAcaoDois)
         {
-
-            Console.Clear();
-            Console.WriteLine(" RPG COMBAT");
-            Console.WriteLine(" ---------------------");
-            Console.WriteLine($" 1. {nomeAcaoUm}\n 2. {nomeAcaoDois}\n 2. Sair");
-            Console.Write(" \nDigite o número da ação desejada: ");
+            Console.WriteLine($"  1. {nomeAcaoUm}\n  2. {nomeAcaoDois}\n  2. Sair");
+            Console.Write(" \n Digite: ");
 
             string key = Console.ReadLine();
 

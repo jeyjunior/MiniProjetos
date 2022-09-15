@@ -13,12 +13,28 @@ namespace RPGCombat.Personagens
 
         public string RacaPersonagem { get; private set; }
 
-        public Personagem(string racaPersonagem) {
+        public Personagem(string racaPersonagem, int vidaMax, int manaMax, int atkMax) {
             RacaPersonagem = racaPersonagem;
+
+            Random r = new();
+
+            if(racaPersonagem != "Humano")
+            {
+                Vida = r.Next(vidaMax/2, vidaMax);
+                Mana = r.Next(manaMax/2, manaMax);
+                Atk = r.Next(atkMax/2, atkMax);
+            }
+            else
+            {
+                Vida = vidaMax;
+                Mana = manaMax;
+                Atk = atkMax;
+            }
         }
 
-        public abstract void SetAtributosInicialDaRaca(int vida, int mana, int atk);
-
-
+        protected Personagem(string racaPersonagem)
+        {
+            RacaPersonagem = racaPersonagem;
+        }
     }
 }
