@@ -3,6 +3,7 @@ using RPGCombat.Jogadores;
 using RPGCombat.Inimigos;
 using RPGCombat.Personagens;
 using System;
+using System.Collections.Generic;
 
 namespace RPGCombat
 {
@@ -11,25 +12,32 @@ namespace RPGCombat
     {
         static void Main(string[] args)
         {
-            //Gerenciamento gerenciamento = new();
-            //gerenciamento.Game();
+            int? _menuInicial = null;
+            bool _jogoPrincipal = false;
 
-            Jogador jogador = new(Personagem.Raca.Humano);
-            Console.WriteLine($"Raça do personagem: {jogador.PersonagemRaca}");
-            Console.WriteLine($"Life: {jogador.Vida}");
-            Console.WriteLine($"Mana: {jogador.Mana}");
-            Console.WriteLine($"Atk: {jogador.Atk}");            
+            var jogador = InstanciarPersonagens.InstanciarJogador();
+            
+            do
+            {
+                //MENU INICIAL
+                while (_menuInicial == null)
+                {
+                    _menuInicial = Menu.ExibirMenu("Iniciar Jogo");
+                    Console.Clear();
+                }
+
+
+                Combate.IniciarCombate(jogador);
+                
+                Console.WriteLine("Aperte enter para iniciar proximo combate");
+                Console.ReadLine();
+            }
+            while (!_jogoPrincipal);
+
 
             
-            Jogador orc = new(Personagem.Raca.Orc);
-            Console.WriteLine($"Raça do personagem: {orc.PersonagemRaca}");
-            Console.WriteLine($"Life: {orc.Vida}");
-            Console.WriteLine($"Mana: {orc.Mana}");
-            Console.WriteLine($"Atk: {orc.Atk}");       
-            
 
 
-            
             Console.ReadLine();
         }
     }

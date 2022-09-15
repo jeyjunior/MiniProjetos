@@ -3,12 +3,12 @@ using System;
 
 namespace RPGCombat.Inimigos
 {
-    public class Orc : Habilidades
+    public class Slime : Habilidades
     {
-        public Orc(string racaPersonagem) : base(racaPersonagem)
+        public Slime(string racaPersonagem) : base(racaPersonagem)
         {
-            Random r = new();
-            SetAtributosInicialDaRaca(r.Next(30, 50), r.Next(5, 20), r.Next(1, 10));
+            Random r = new Random();
+            SetAtributosInicialDaRaca(r.Next(15,30), r.Next(5,10), 1);
         }
 
         public override void SetAtributosInicialDaRaca(int vida, int mana, int atk)
@@ -18,8 +18,6 @@ namespace RPGCombat.Inimigos
             Atk = atk;
         }
 
-
-
-        //regras atributos do orc
+        //regras atributos do slime
     }
 }
