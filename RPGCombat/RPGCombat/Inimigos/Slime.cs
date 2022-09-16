@@ -3,12 +3,24 @@ using System;
 
 namespace RPGCombat.Inimigos
 {
-    public class Slime : Habilidades
+    public class Slime : Personagem
     {
-        //regras atributos do slime
-        public Slime(string racaPersonagem, int vida, int mana, int atk) : base(racaPersonagem, vida, mana, atk)
+        public Slime(string racaPersonagem, int vidaMax, int manaMax, int atkMax) : base(racaPersonagem, vidaMax, manaMax, atkMax)
         {
+        }
 
+        public override void SetMinhasHabilidades()
+        {
+            var skills = new ListaHabilidades();
+            MinhasHabilidadesDeAtaqueFisico.Add(skills.HabilidadeDeAtaqueFisico[0]);
+            MinhasHabilidadesDeAtaqueFisico.Add(skills.HabilidadeDeAtaqueFisico[1]);
+            MinhasHabilidadesDeAtaqueFisico.Add(skills.HabilidadeDeAtaqueFisico[2]);
+
+            MinhasHabilidadesDeAtaqueMagico.Add(skills.HabilidadeDeAtaqueMagico[0]);
+            MinhasHabilidadesDeAtaqueMagico.Add(skills.HabilidadeDeAtaqueMagico[1]);
+            MinhasHabilidadesDeAtaqueMagico.Add(skills.HabilidadeDeAtaqueMagico[2]);
+
+            MinhasHabilidadesDeSuporte.Add(skills.HabilidadeDeSuporte[0]);
         }
     }
 }

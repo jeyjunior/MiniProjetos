@@ -11,7 +11,7 @@ namespace RPGCombat.GerenciamentoDoJogo
         public static int totalInimigos = 3;
 
         //Opção Instanciar um inimigo de forma "aleatoria"
-        public static Habilidades IntanciarInimigosAleatorios(int num)
+        public static Personagem IntanciarInimigosAleatorios(int num)
         {
             switch (num)
             {
@@ -30,19 +30,19 @@ namespace RPGCombat.GerenciamentoDoJogo
         //Opção de instanciar individualmente
         public static Jogador InstanciarJogador()
         {
-            return new Jogador("Humano", 100, 50, 15);
+            return new Jogador("Humano", 10000, 510, 15);
         }
         public static Slime InstanciarSlime()
         {
-            return new Slime("Slime", 30, 10, 4);
+            return new Slime("Slime", 30, 1010, 4);
         }        
         public static Orc InstanciarOrc()
         {
-            return new Orc("Orc", 50, 20, 6);
+            return new Orc("Orc", 50, 2000, 6);
         }
         public static Goblin InstanciarGoblin()
         {
-            return new Goblin("Goblin", 60, 15, 10);
+            return new Goblin("Goblin", 60, 1500, 10);
         }
 
     }

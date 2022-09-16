@@ -9,7 +9,7 @@ namespace RPGCombat.GerenciamentoDoJogo
 {
     public static class InformacaoDoObjeto
     {
-        public static void Informacoes(string nomeDoObjeto, Habilidades objeto)
+        public static void Informacoes(string nomeDoObjeto, Personagem objeto)
         {
             Console.WriteLine($"  {nomeDoObjeto}:");
             Console.WriteLine($"  Life: {objeto.Vida}");

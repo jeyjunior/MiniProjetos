@@ -13,6 +13,14 @@ namespace RPGCombat.Personagens
 
         public string RacaPersonagem { get; private set; }
 
+        //Skills
+        private List<string> minhasHabilidadesFisicas = new List<string>();
+        private List<string> minhasHabilidadesMagicas = new List<string>();
+        private List<string> minhasHabilidadesSuporte = new List<string>();
+        public List<string> MinhasHabilidadesDeAtaqueFisico { get => minhasHabilidadesFisicas; private set => minhasHabilidadesFisicas = value; }
+        public List<string> MinhasHabilidadesDeAtaqueMagico { get => minhasHabilidadesMagicas; private set => minhasHabilidadesMagicas = value; }
+        public List<string> MinhasHabilidadesDeSuporte { get => minhasHabilidadesSuporte; private set => minhasHabilidadesSuporte = value; }
+
         public Personagem(string racaPersonagem, int vidaMax, int manaMax, int atkMax) {
             RacaPersonagem = racaPersonagem;
 
@@ -30,11 +38,10 @@ namespace RPGCombat.Personagens
                 Mana = manaMax;
                 Atk = atkMax;
             }
+
+            SetMinhasHabilidades();
         }
 
-        protected Personagem(string racaPersonagem)
-        {
-            RacaPersonagem = racaPersonagem;
-        }
+        public abstract void SetMinhasHabilidades();
     }
 }
